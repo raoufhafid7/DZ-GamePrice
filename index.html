@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DZ GamePrice — أسعار الألعاب والـGaming في الجزائر</title>
+<meta name="description" content="منصة جزائرية لمقارنة أسعار الألعاب والكونسول وقطع PC وملحقات Gaming.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg-glow"></div>
+<header class="top">
+  <div class="wrap nav">
+    <a class="logo" href="#"><span>🎮</span><b>DZ GamePrice</b><small>Compare • Find • Play</small></a>
+    <div class="search"><span>⌕</span><input id="globalSearch" placeholder="ابحث عن PS5، RTX 4060، GTA V..." autocomplete="off"></div>
+    <nav>
+      <a href="#home">الرئيسية</a><a href="#categories">التصنيفات</a><a href="#deals">العروض</a>
+      <a href="#compare">مقارنة الأسعار</a><a href="#pc">PC</a>
+    </nav>
+    <button class="ghost" onclick="alert('واجهة تسجيل الدخول جاهزة للربط مع Backend')">تسجيل الدخول</button>
+    <button class="primary" onclick="scrollToId('products')">تصفح الأسعار</button>
+  </div>
+</header>
+
+<main id="home">
+<section class="hero wrap">
+  <div class="hero-copy">
+    <span class="pill">🇩🇿 منصة Gaming للجزائر</span>
+    <h1>اعرف <em>السعر الحقيقي</em><br>قبل ما تشتري.</h1>
+    <p>قارن أسعار الألعاب والكونسول وقطع PC والملحقات من عدة متاجر، واعثر على أفضل عرض في ثوانٍ.</p>
+    <div class="hero-search"><input id="heroSearch" placeholder="مثال: PS5 Slim أو GTA V أو RTX 4060"><button onclick="doSearch()">بحث 🔎</button></div>
+    <div class="trust"><span>✓ أسعار بالدينار الجزائري</span><span>✓ جديد ومستعمل</span><span>✓ مقارنة متعددة المتاجر</span></div>
+  </div>
+  <div class="hero-art">
+    <div class="console ps">PS5</div><div class="console xbox">XBOX</div>
+    <div class="pcbox">PC<br><b>GAMING</b></div>
+  </div>
+</section>
+
+<section class="wrap stats">
+  <div><b>12,480+</b><span>منتج</span></div><div><b>86</b><span>متجر</span></div><div><b>48,200+</b><span>سعر محدث</span></div><div><b>48 ولاية</b><span>تغطية الجزائر</span></div>
+</section>
+
+<section id="categories" class="wrap section">
+  <div class="section-head"><div><span class="eyebrow">استكشف</span><h2>كل ما يتعلق بالـGaming</h2></div><a href="#products">عرض الكل ←</a></div>
+  <div class="cats">
+    <button onclick="filterCat('games')">🎮<b>الألعاب</b><small>PS • Xbox • PC</small></button>
+    <button onclick="filterCat('console')">🕹️<b>الكونسول</b><small>PlayStation • Xbox</small></button>
+    <button onclick="filterCat('pc')">🖥️<b>PC Gaming</b><small>Builds • Laptops</small></button>
+    <button onclick="filterCat('gpu')">⚡<b>كروت الشاشة</b><small>NVIDIA • AMD</small></button>
+    <button onclick="filterCat('accessories')">🎧<b>ملحقات</b><small>Controllers • Headsets</small></button>
+    <button onclick="filterCat('offers')">🔥<b>عروض</b><small>خصومات اليوم</small></button>
+  </div>
+</section>
+
+<section id="deals" class="wrap section">
+  <div class="deal-grid">
+    <div class="deal"><span>🔥</span><div><b>أفضل العروض اليوم</b><small>منتجات عليها تخفيضات</small></div><a href="#products">شاهد →</a></div>
+    <div class="deal blue"><span>📉</span><div><b>أكبر انخفاضات الأسعار</b><small>تابع تغير السعر</small></div><a href="#products">شاهد →</a></div>
+    <div class="deal purple"><span>🔔</span><div><b>تنبيهات الأسعار</b><small>أخبرني عندما ينخفض السعر</small></div><a href="#products">فعّل →</a></div>
+  </div>
+</section>
+
+<section id="products" class="wrap section">
+  <div class="section-head"><div><span class="eyebrow">أسعار السوق</span><h2>المنتجات الأكثر بحثاً</h2></div><span id="resultCount" class="muted"></span></div>
+  <div class="content-grid">
+    <aside class="filters">
+      <b>تصفية النتائج</b>
+      <label>الفئة<select id="catFilter"><option value="all">الكل</option><option value="games">الألعاب</option><option value="console">الكونسول</option><option value="pc">PC</option><option value="gpu">GPU</option><option value="accessories">ملحقات</option></select></label>
+      <label>الحالة<select><option>الكل</option><option>جديد</option><option>مستعمل</option></select></label>
+      <label>السعر (دج)<div class="range"><input id="minPrice" type="number" placeholder="من"><input id="maxPrice" type="number" placeholder="إلى"></div></label>
+      <button class="primary full" onclick="applyFilters()">تطبيق الفلاتر</button>
+      <button class="ghost full" onclick="resetFilters()">إعادة ضبط</button>
+    </aside>
+    <div><div id="productGrid" class="products"></div></div>
+  </div>
+</section>
+
+<section id="compare" class="wrap section compare">
+  <div class="section-head"><div><span class="eyebrow">قارن</span><h2>مقارنة الأسعار</h2></div></div>
+  <div class="compare-card">
+    <div class="compare-head"><div><b>PS5 Slim 1TB</b><small>أفضل الأسعار من المتاجر</small></div><span class="best">أقل سعر</span></div>
+    <div class="price-row"><span>GameDZ</span><b>139,000 دج</b><span class="green">متوفر</span><button>زيارة المتجر ↗</button></div>
+    <div class="price-row"><span>TechStore</span><b>142,500 دج</b><span class="green">متوفر</span><button>زيارة المتجر ↗</button></div>
+    <div class="price-row"><span>DZ Games</span><b>145,000 دج</b><span class="orange">كمية محدودة</span><button>زيارة المتجر ↗</button></div>
+    <div class="history"><b>📈 تاريخ السعر</b><div class="chart"><i style="height:65%"></i><i style="height:58%"></i><i style="height:72%"></i><i style="height:50%"></i><i style="height:43%"></i><i style="height:36%"></i><i style="height:30%"></i></div><small>انخفض السعر 8.5% خلال آخر 30 يوماً</small></div>
+  </div>
+</section>
+
+<section id="pc" class="wrap section pc-section">
+  <div class="section-head"><div><span class="eyebrow">PC BUILDER</span><h2>كوّن جهازك وقارن القطع</h2></div></div>
+  <div class="builder">
+    <div class="part"><span>🧠</span><b>المعالج</b><small>Ryzen 5 / Core i5...</small></div>
+    <div class="plus">＋</div><div class="part"><span>⚡</span><b>GPU</b><small>RTX / RX...</small></div>
+    <div class="plus">＋</div><div class="part"><span>💾</span><b>RAM</b><small>16 / 32 / 64GB</small></div>
+    <div class="plus">＋</div><div class="part"><span>🖥️</span><b>الشاشة</b><small>144Hz / 240Hz...</small></div>
+    <button class="primary" onclick="alert('PC Builder جاهز لإضافة قاعدة بيانات القطع')">ابدأ التجميعة</button>
+  </div>
+</section>
+</main>
+
+<footer class="footer"><div class="wrap foot"><div class="logo"><span>🎮</span><b>DZ GamePrice</b><small>Compare • Find • Play</small></div><div><b>عن الموقع</b><p>منصة مقارنة أسعار Gaming في الجزائر.</p></div><div><b>روابط</b><p>الأسعار • العروض • المتاجر • PC Builder</p></div><div><b>تابعنا</b><p>Facebook • YouTube • TikTok • Discord</p></div></div><div class="copy">© 2026 DZ GamePrice — نسخة تجريبية قابلة للتطوير</div></footer>
+<script src="app.js"></script>
+</body></html>
